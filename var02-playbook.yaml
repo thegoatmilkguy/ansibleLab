@@ -1,0 +1,17 @@
+---
+- name: Challenge!
+  hosts: professors
+  gather_facts: no
+
+  vars_prompt:
+    - name: "ansible_ssh_pass"  # password to connect to the hosts in the professors group
+      prompt: "What is your ssh password?"
+      private: yes
+      confirm: yes
+      encrypt: "sha512_crypt"
+      salt_size: 7
+      default: "qwerty"
+  tasks:
+    - name: Display the pass
+      debug:
+        msg: "{{ ansible_ssh_pass }}"
