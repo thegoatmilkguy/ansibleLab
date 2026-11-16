@@ -1,0 +1,14 @@
+---
+- name: Copy a private file
+  hosts: planetexpress:!farnsworth
+  gather_facts: true
+
+  tasks:
+    - name: Write each host's own name into a private file
+      ansible.builtin.copy:
+        content: "{{ ansible_facts['hostname'] }}\n"
+        dest: /home/admin1/whoami.txt
+        owner: admin1
+        group: sysadmin
+        mode: '0600'
+      become: true

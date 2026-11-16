@@ -1,0 +1,12 @@
+---
+- name: Fetch whoami.txt from each host
+  hosts: planetexpress:!farnsworth
+  gather_facts: false
+
+  tasks:
+    - name: Pull whoami.txt back to the controller
+      ansible.builtin.fetch:
+        src: /home/admin1/whoami.txt
+        dest: "/home/student/mycode/fetched/{{ inventory_hostname }}--whoami.txt"
+        flat: true
+      become: true
