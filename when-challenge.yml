@@ -1,0 +1,21 @@
+---
+- name: Install tree on every OS family
+  hosts: planetexpress
+  gather_facts: yes
+  connection: ansible.builtin.ssh
+
+  tasks:
+
+    - name: Install tree on every Ubuntu machine
+      ansible.builtin.apt:
+        name: tree
+        state: present
+      become: yes
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Install tree on every Fedora machine
+      ansible.builtin.dnf:
+        name: tree
+        state: present
+      become: yes
+      when: ansible_facts['os_family'] == "RedHat"
