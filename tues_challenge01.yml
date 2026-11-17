@@ -1,0 +1,34 @@
+---
+- name: user and group builder
+  hosts: planetexpress
+  become: true
+  vars_files:
+    - ~/mycode/vars/tuesday_challenge_names.yml
+
+  tasks:
+    - name: create groups
+      ansible.builtin.group:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ tuesday }}"
+
+
+
+    - name: create users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ tuesday }}"
+        
+    - name: install figlet and sl
+      package:
+        name:
+          - figlet
+          - sl
+        state: present
+
+    - name: announce completion
+      debug:
+        msg: "I've completed the challenge!"
+
+
