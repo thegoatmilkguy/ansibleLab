@@ -31,6 +31,15 @@
     copy:
       src: ~/mycode/files/index.html
       dest: /var/www/html/
+    notify:
+      - restart_apache
+
+  - name: copy about.html
+    copy:
+      src: ~/mycode/files/about.html
+      dest: /var/www/html/
+    notify:
+      - restart_apache
 
   # if dest is directory download every time
   # but only replace if destination is different
