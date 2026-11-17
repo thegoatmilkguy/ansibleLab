@@ -1,0 +1,15 @@
+---
+- name: Report only online servers
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    csv_file: /home/student/mycode/files/ip_data.csv
+
+  tasks:
+    - name: Show the IP of each online server
+      ansible.builtin.debug:
+        msg: "{{ item }} is online at {{ lookup('csvfile', item ~ ' file=' ~ csv_file ~ ' delimiter=, col=1') }}"
+      loop: [pe01, pe02, pe03, pe04, pe05, pe06]
+      when: lookup('csvfile', item ~ ' file=' ~ csv_file ~ ' delimiter=, col=3') == 'online'
