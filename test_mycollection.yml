@@ -1,0 +1,26 @@
+---
+- name: Test my custom collection
+  hosts: localhost
+  gather_facts: no
+
+  collections:
+    - alta3.mycollection
+
+  tasks:
+    - name: Download one picture by its NASA ID using the module
+      alta3.mycollection.nasa_images:
+        nasa_id: art002e021278
+        dest: /home/student/static
+      register: nasa_result
+
+    - name: Debug the result
+      debug:
+        var: nasa_result
+
+    - name: Use the image_downloader role
+      include_role:
+        name: alta3.mycollection.image_downloader
+      vars:
+        image_query: apollo
+        image_count: 2
+        image_dest: /home/student/static

@@ -1,0 +1,13 @@
+---
+# Directory the images are saved into (created if missing)
+image_dest: ~/nasa_images
+# What to search for (empty string to search by year or center only)
+image_query: nebula
+# How many images to save (1 to 25)
+image_count: 3
+# Pick at random instead of taking the first matches
+image_shuffle: false
+# Optional filters, unset by default:
+# image_center: JPL
+# image_year_start: 2020
+# image_year_end: 2022

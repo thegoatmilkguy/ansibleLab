@@ -1,0 +1,36 @@
+---
+- name: dirbuiler9000
+  hosts: planetexpress:!farnsworth
+
+
+  vars_prompt:
+    - name: "yourDir"
+      prompt: "What would you like to call name this directory?"
+      confirm: yes
+      default: "new_default"
+
+  tasks:
+    - name: dir and file builder
+      become: true
+      block:
+        - name: dirbuilder
+          ansible.builtin.file:
+            path: /home/date_info/{{ yourDir }}
+            state: directory 
+            mode: '0777'
+
+        - name: write date
+          ansible.builtin.shell:
+            cmd: echo $(date) > /home/date_info/{{ yourDir }}/today.txt
+
+
+    - name: today file reader
+      block:
+        - name: read in file
+          ansible.builtin.slurp:
+            src: /home/date_info/{{ yourDir }}/today.txt
+          register: today_file
+
+        - name: print file
+          ansible.builtin.debug:
+            msg: "{{ today_file['content'] | b64decode }}"

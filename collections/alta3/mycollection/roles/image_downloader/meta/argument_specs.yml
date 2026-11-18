@@ -1,0 +1,32 @@
+---
+argument_specs:
+  main:
+    short_description: Download images from the NASA Image and Video Library
+    description:
+      - Searches NASA and saves the matching images into a directory.
+    options:
+      image_dest:
+        type: path
+        default: ~/nasa_images
+        description: Directory the images are saved into (created if missing).
+      image_query:
+        type: str
+        default: nebula
+        description: What to search for. Set it to an empty string to search by year or center only.
+      image_count:
+        type: int
+        default: 3
+        description: How many images to save, from 1 to 25.
+      image_shuffle:
+        type: bool
+        default: false
+        description: Pick at random from the first 100 matches.
+      image_center:
+        type: str
+        description: Only images from this NASA center, for example JPL.
+      image_year_start:
+        type: int
+        description: First year to include.
+      image_year_end:
+        type: int
+        description: Last year to include.

@@ -1,0 +1,21 @@
+---
+# The short module name (nasa_images, not alta3.nasa_images.nasa_images) is deliberate.
+# The "making a collection" lab copies this role and the module into a different
+# collection, where a fully qualified name would not resolve.
+- name: Download images from the NASA Image and Video Library
+  nasa_images:
+    dest: "{{ image_dest }}"
+    query: "{{ image_query | default(omit, true) }}"
+    center: "{{ image_center | default(omit, true) }}"
+    year_start: "{{ image_year_start | default(omit, true) }}"
+    year_end: "{{ image_year_end | default(omit, true) }}"
+    count: "{{ image_count }}"
+    shuffle: "{{ image_shuffle }}"
+  register: image_result
+
+- name: Show what was saved
+  ansible.builtin.debug:
+    msg: "{{ item.title }} ({{ item.date }}) saved as {{ item.path }}"
+  loop: "{{ image_result.images }}"
+  loop_control:
+    label: "{{ item.nasa_id }}"
