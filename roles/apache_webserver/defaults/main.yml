@@ -1,0 +1,7 @@
+---
+# defaults file for apache_webserver
+# these are the LOWEST priority variables in Ansible,
+# so a playbook can easily override any of them
+web_heading: "Apache Webserver is up and running!"
+web_message: "Way to automate with Ansible!"
+apache_package: apache2

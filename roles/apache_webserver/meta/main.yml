@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: student
+  description: Installs Apache, deploys a home page, and restarts Apache when its config changes
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+
+# roles listed here run BEFORE this role
+# our role doesn't need any others, so the list is empty
+dependencies: []

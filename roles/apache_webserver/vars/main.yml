@@ -1,0 +1,5 @@
+---
+# vars file for apache_webserver
+# these have HIGH priority, so a play's vars cannot override them
+apache_service: apache2
+apache_conf_url: https://raw.githubusercontent.com/rzfeeser/alta3files/master/apache2.conf

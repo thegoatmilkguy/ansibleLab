@@ -1,0 +1,10 @@
+---
+- name: Use the image_downloader role to download pictures
+  hosts: localhost
+  roles:
+    - role: alta3.nasa_images.image_downloader
+      vars:
+        image_query: moon
+        image_count: 5
+        image_shuffle: true
+        image_dest: /home/student/static

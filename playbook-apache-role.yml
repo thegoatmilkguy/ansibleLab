@@ -1,0 +1,11 @@
+---
+- name: Apache server installed using a role
+  hosts: web
+  gather_facts: no
+  become: yes
+
+  vars:
+    web_heading: "Welcome to Planet Express!"
+
+  roles:
+    - apache_webserver   # Ansible looks for this in ~/mycode/roles/

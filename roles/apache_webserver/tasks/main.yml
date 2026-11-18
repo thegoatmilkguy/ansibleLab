@@ -1,0 +1,30 @@
+---
+# tasks file for apache_webserver
+
+- name: latest Apache version installed
+  package:
+    name: "{{ apache_package }}"
+    state: latest
+
+- name: Apache enabled and running
+  service:
+    name: "{{ apache_service }}"
+    enabled: yes
+    state: started
+
+# build index.html from two variables
+- name: index.html in place
+  copy:
+    dest: /var/www/html/index.html
+    content: |
+      <body>
+      <h1>{{ web_heading }}</h1>
+      {{ web_message }}
+      </body>
+
+- name: Download a copy of apache2.conf
+  get_url:
+    url: "{{ apache_conf_url }}"
+    dest: /etc/apache2/
+  notify:
+    - restart_apache
