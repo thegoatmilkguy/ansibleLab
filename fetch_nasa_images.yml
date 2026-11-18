@@ -1,0 +1,18 @@
+---
+- name: Fetch NASA images
+  hosts: localhost
+  tasks:
+    - name: Download 3 pictures of jupiter
+      alta3.nasa_images.nasa_images:
+        query: Jupiter
+        count: 3
+        center: JPL
+        dest: /home/student/static
+        year_start: 2020
+        year_end: 2023
+      register: nasa_result
+
+    - name: Show every title and where it was saved
+      debug:
+        msg: "{{ item.title }} -> {{ item.path }}"
+      loop: "{{ nasa_result.images }}"
