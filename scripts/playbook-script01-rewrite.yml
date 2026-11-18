@@ -1,0 +1,22 @@
+---
+- name: Playbook that sends HTTP GET to target URI
+  hosts: localhost
+
+  vars_prompt:
+    - name: pokemon
+      prompt: Which pokemon do you want to look up?
+      default: pikachu
+
+  vars:
+    urltolookup: "https://pokeapi.co/api/v2/pokemon/"
+
+  tasks:
+  - name: Lookup API with uri module
+    uri:
+      url: "{{ urltolookup }}/{{ pokemon }}"
+      method: GET
+    register: results    # save the JSON sent back by our script
+
+  - name: Print out the 'results'
+    debug:
+      var: results
